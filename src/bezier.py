@@ -1,4 +1,5 @@
 import bezier_bruteforce as bbf
+import bezier_dnc as bdnc
 import matplotlib.pyplot as plt
 import random
 import show_curve as showcurve
@@ -28,4 +29,8 @@ iterations = int(input("Masukkan iterasi yang ingin kamu lakukan: "))
 if(choice=='1'):
     bezier_curve_per_iteration = bbf.get_bruteforce_bezier(iterations, control_points)
     print(bezier_curve_per_iteration[-1])
+    showcurve.show_curve_per_iterations(bezier_curve_per_iteration)
+elif(choice=='2'):
+    bezier_curve_per_iteration = bdnc.bezier_dnc_final_curve(control_points[0], control_points[1], control_points[2], 1)
+    print(bezier_curve_per_iteration)
     showcurve.show_curve_per_iterations(bezier_curve_per_iteration)
