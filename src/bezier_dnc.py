@@ -28,5 +28,5 @@ def bezier_dnc_final_curve(point1, point2, point3, iteration) :
 
 control_points = [[1,2], [3,4], [5,7]]
 iteration = int(input("iter : "))
-bezier = bezier_dnc_final_curve(control_points[0], control_points[1], control_points[2], 2)
+bezier = bezier_dnc_final_curve(control_points[0], control_points[1], control_points[2], iteration)
 print(bezier)
