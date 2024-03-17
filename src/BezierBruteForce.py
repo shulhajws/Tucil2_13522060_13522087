@@ -1,6 +1,4 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import math
+import time
 
 def findMidpoint(point1, point2):
     """Returning the midpoint of two points"""
@@ -37,6 +35,7 @@ def getBezierMidpoints(points):
 
 def getBruteForceBezier(iterations, controlPoints):
     """Getting bezier curve per iteration"""
+    startTime = time.time_ns()
     resultPerIteration = []
     bezierResults = []
     tempMidpoints = controlPoints
@@ -49,8 +48,10 @@ def getBruteForceBezier(iterations, controlPoints):
         tempMidpoints = insertPoints(iterationResult, midpoint)
         prevIterationResult = resultPerIteration[i]
     bezierResults = resultPerIteration[-1]
+    endTime = time.time_ns()
+    calculatingTime = endTime - startTime
 
-    return resultPerIteration
+    return resultPerIteration, calculatingTime
 
 
 
