@@ -12,8 +12,16 @@ Anda dapat membuat Kurva Bezier dengan algoritma:
 2. Divide and Conquer
 ''')
 choiceAlgo = input("Pilih algoritma yang ingin kamu gunakan: ")
+while (choiceAlgo != 1 or choiceAlgo != 2) :
+    print("Masukkan pilihan yang sesuai! (1/2)")
+    choiceAlgo = input("Pilih algoritma yang ingin kamu gunakan: ")
+
 
 iterations = int(input("Masukkan iterasi yang ingin kamu lakukan: "))
+while (iterations < 0) :
+    print("Jumlah iterasi harus lebih besar dari atau sama dengan 0!")
+    iterations = int(input("Masukkan iterasi yang ingin kamu lakukan: "))
+
 
 print('''
 Masukkan tiga titik kontrol dengan:
@@ -21,6 +29,10 @@ Masukkan tiga titik kontrol dengan:
 2. Random
 ''')
 choiceInsControlPoints = input("Pilih caramu memasukkan titik kontrol: ")
+while (choiceInsControlPoints != 1 or choiceInsControlPoints != 2) :
+    print("Masukkan pilihan yang sesuai! (1/2)")
+    choiceInsControlPoints = input("Pilih caramu memasukkan titik kontrol: ")
+
 if(choiceInsControlPoints=='1'):
     controlPoints= []
     for i in range(3):
