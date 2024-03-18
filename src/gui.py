@@ -1,112 +1,97 @@
-'''
-    * Summary of File: 
-    * 
-    *   Program to display the Bezier Curve of any degree
-    *   Using De Castlejau's algorithm to display the curve
-    * Compilation Command : python bezier.pyw
-'''
-
-#!/usr/bin/python
-
 import tkinter as tk
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import time
 
-CANVAS_WIDTH = 800
-CANVAS_HEIGHT = 800
+def findMidpoint(point1, point2):
+    """Returning the midpoint of two points"""
+    midpoint = [(point1[0] + point2[0]) / 2, (point1[1] + point2[1]) / 2]
+    return midpoint
 
-# Initializing X coordinate, Y coordinate, and storing indices of control point arrays
-Px = []
-Py = []
-cpoints = []
+def bezierDNC(point1, point2, point3, iteration):
+    """Getting points for bezier curve except the first and last control points"""
+    bezierPoint = []  
+    if iteration > 0:  
+        x = []
+        y = []
 
-# Initializing array to delete path when canvas gets updated
-del_arr = []
+        midpoint1 = findMidpoint(point1, point2)
+        x.append(midpoint1[0])
+        y.append(midpoint1[1])
+        midpoint2 = findMidpoint(point2, point3)
+        x.append(midpoint2[0])
+        y.append(midpoint2[1])
+        midpoint3 = findMidpoint(midpoint1, midpoint2)
+        x.append(midpoint3[0])
+        y.append(midpoint3[1])
+        plt.plot(x, y, marker='o', markersize = 3, color='pink')
+        plt.pause(0.5)
+        iteration -= 1
 
-# Initialize Control Polygon Array
-c_polygon = []
+        leftBezierPoints = bezierDNC(point1, midpoint1, midpoint3, iteration) # DIVIDE AND CONQUER
+        bezierPoint.extend(leftBezierPoints) # COMBINE
+        bezierPoint.append(midpoint3)
+        rightBezierPoints = bezierDNC(midpoint3, midpoint2, point3, iteration) # DIVIDE AND CONUER
+        bezierPoint.extend(rightBezierPoints) # COMBINE
 
-# Initializing variables to store X and Y coordinates for the centre of a control point
-global x, y
+    return bezierPoint  
 
-# Function that defines De Castlejau's algorithm
-def de_castlejau(P, u):
-    Temp = P[:]
-    n = len(Temp)
+def bezierCurveByDNC(control_points, iteration):
+    """Conquering the points of bezier curve result for each iteration"""
+    allBezierCurve = []
+    # for i in range(1, iteration + 1):
+    #     if (i == iteration):
+    startTime = time.time_ns()
+    bezierCurvePoints = []
+    bezierCurvePoints.append(control_points[0])
+    bezierCurvePoints.extend(bezierDNC(control_points[0], control_points[1], control_points[2], i))
+    bezierCurvePoints.append(control_points[2])
+        # if (i == iteration):
+    endTime = time.time_ns()
+    calculatingTime = endTime - startTime
+    allBezierCurve.append(bezierCurvePoints)
+    return allBezierCurve, calculatingTime
 
-    for k in range(1, n):
-        for i in range(0, n - 1 - k + 1):
-            Temp[i] = (1 - u)*Temp[i] + u*Temp[i + 1]
-    return Temp[0]
+def plotBezierCurve(control_points, iterations):
+    """Plot the Bezier curve iteration by iteration using Tkinter"""
+    root = tk.Tk()
+    root.title('Bezier Curve Iterations')
 
-# Function that draws and stores a control point and deletes a control point if clicked
-def drawOval(event):
-      x = event.x
-      y = event.y
+    fig = plt.figure(figsize=(6, 4))
+    plt.xlabel('X')
+    plt.ylabel('Y')
+    plt.title('Bezier Curve Iterations')
 
-      if cpoints:
-            global i
-            for i in range(len(Px)):
-                  # Checks if the point clicked is inside the control point/square
-                  is_event_inside_x_coords = event.x > (Px[i] - 10) and event.x < (Px[i] + 10)
-                  is_event_inside_y_coords = event.y > (Py[i] - 10) and event.y < (Py[i] + 10)
-                  if ( is_event_inside_x_coords and is_event_inside_y_coords):
-                        C.delete(cpoints[i])
-                        del cpoints[i]
-                        del Px[i]
-                        del Py[i]
-                        return          
-      
-      # Draws a circle inside a square of side length 20 with centre (x, y)
-      cp = (C.create_oval(x - 10, y - 10, x + 10, y + 10))
-      cpoints.append(cp)        
-      Px.append(x)
-      Py.append(y)
-
-# Function that inserts new control point when right mouse button is released
-def moveOval(event):
-      x = event.x
-      y = event.y
-      cp = (C.create_oval(x - 10, y - 10, x + 10, y + 10))      
-      cpoints.insert(i, cp)          
-      Px.insert(i, x)
-      Py.insert(i, y)
-
-      C.delete(c_polygon[i-1], c_polygon[i])
-      del c_polygon[i-1], c_polygon[i]
-
-# Function that draws the curve when updated
-def drawCurve(event):
-    k = 0
-    if del_arr:
-      for i in range(len(del_arr)):
-            C.delete(del_arr[i])
-    if c_polygon:
-      for i in range(len(c_polygon)):
-            C.delete(c_polygon[i])
-
-    while k < 1:
-        k += 0.001
-        x = de_castlejau(Px, k)
-        y = de_castlejau(Py, k)
-        point = C.create_oval(x - 1, y - 1, x + 1, y + 1)
-        del_arr.append(point)
-
-    #c_polygon = []
-    for x in range(len(cpoints) - 1):
-          cpol = C.create_line(Px[x], Py[x], Px[x + 1], Py[x + 1], fill = "light gray")  
-          c_polygon.append(cpol)  
-
+    canvas = FigureCanvasTkAgg(fig, master=root)
+    canvas_widget = canvas.get_tk_widget()
+    canvas_widget.pack()
     
-# Main function   
-if __name__ == '__main__':
-    top = tk.Tk()
-    C = tk.Canvas(top, bg="white", height=CANVAS_HEIGHT, width=CANVAS_WIDTH)
-    C.pack()
-    # Button 1 - Left mouse button, Button 2 - Right mouse button
-    top.bind("<Button 1>", drawOval)
-    top.bind("<Button 1>", drawCurve, add="+")
-    top.bind("<Button 2>", drawOval)
-    top.bind("<ButtonRelease-2>", moveOval)
-    top.bind("<ButtonRelease-2>", drawCurve, add="+")
-    message = tk.Label(top, text = "Bezier Curve Drawer")
-    message.pack(side = tk.BOTTOM)
-    top.mainloop()
+    a = [point[0] for point in control_points]
+    b = [point[1] for point in control_points]
+    plt.plot(a, b, marker='o', markersize=3, color='pink')
+    plt.pause(0.5)
+
+    allbezierpoints, _ = bezierCurveByDNC(control_points, iterations)
+    
+    x = [point[0] for point in allbezierpoints]
+    y = [point[1] for point in allbezierpoints]
+    plt.plot(x, y, marker='o', markersize=3, color='pink')
+    plt.legend()
+    canvas.draw()
+    root.update()
+    time.sleep(1)
+
+    root.mainloop()
+
+if __name__ == "__main__":
+    controlPoints = []
+    for i in range(3):
+        point = [0.0, 0.0]
+        print("Enter coordinates for control point", i+1)
+        point[0] = float(input("Enter x-coordinate: "))
+        point[1] = float(input("Enter y-coordinate: "))
+        controlPoints.append(point)
+
+    iterations = int(input("Enter the number of iterations: "))
+    
+    plotBezierCurve(controlPoints, iterations)
