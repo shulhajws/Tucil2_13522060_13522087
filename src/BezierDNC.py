@@ -6,6 +6,7 @@ def findMidpoint(point1, point2):
     return midpoint
 
 def bezierDNC(point1, point2, point3, iteration):
+    """Getting points for bezier curve except the first and last control points"""
     bezierPoint = []  
     if iteration > 0:  
         midpoint1 = findMidpoint(point1, point2)
@@ -23,6 +24,7 @@ def bezierDNC(point1, point2, point3, iteration):
     return bezierPoint  
 
 def bezierCurveByDNC(control_points, iteration):
+    """Conquering the points of bezier curve result for each iteration"""
     allBezierCurve = []
     for i in range(1, iteration + 1):
         if (i == iteration):
