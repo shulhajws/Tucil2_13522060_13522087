@@ -14,12 +14,10 @@ def bezierDNC(point1, point2, point3, iteration):
         midpoint2 = findMidpoint(point2, point3)
         midpoint3 = findMidpoint(midpoint1, midpoint2)
 
-        iteration -= 1
-
-        leftBezierPoints = bezierDNC(point1, midpoint1, midpoint3, iteration) # DIVIDE AND CONQUER
+        leftBezierPoints = bezierDNC(point1, midpoint1, midpoint3, iteration - 1) # DIVIDE AND CONQUER
         bezierPoint.extend(leftBezierPoints) # COMBINE
         bezierPoint.append(midpoint3)
-        rightBezierPoints = bezierDNC(midpoint3, midpoint2, point3, iteration) # DIVIDE AND CONQUER
+        rightBezierPoints = bezierDNC(midpoint3, midpoint2, point3, iteration - 1) # DIVIDE AND CONQUER
         bezierPoint.extend(rightBezierPoints) # COMBINE
 
     return bezierPoint  

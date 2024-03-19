@@ -10,7 +10,7 @@ Bézier Curve with Divide and Conquer-Based Midpoint Algorithm
 * [Repository Structure](#repository-structure)
 
 ## General Information
-Program ini menggunakan Algoritma Divide and Conquer 
+Program ini dapat menampilkan Kurva Bezier Kuadratik dari masukan tiga titik dan jumlah iterasi dengan 2 pilihan algoritma, yaitu Algoritma Brute Force dan Algoritma Divide and Conquer.
 
 ## Creator
 | NIM      | Nama                    | Kelas                                                                                                                                                                                                               |
@@ -19,10 +19,13 @@ Program ini menggunakan Algoritma Divide and Conquer
 | 13522087 | Shulha    | K-01                                                              |
 
 ## Features
-- Menampilkan 
+- Melakukan pembentukan Kurva Bezier dengan Algoritma Brute Force
+- Melakukan pembentukan Kurva Bezier dengan Algoritma Divide and Conquer
+- Menampilkan visualisasi tahap per tahap pembangkitan 
+- Menampilkan control point akhir yang membentuk Kurva Bezier beserta waktu eksekusi pembentukan control point akhir Kurva Bezier
 
 ## Requirements
-Anda harus menginstall bahasa 
+Anda harus menginstall python dan library matplotlib
 
 ## How to Run
 1. Buka terminal and clone repository berikut (https://github.com/shulhajws/Tucil2_13522060_13522087.git)

@@ -51,4 +51,4 @@ elif(choiceAlgo == 2):
 
 print("Titik-titik kurva Bezier final ", bezierCurvePerIteration[-1])
 print(f"Waktu pemrosesan: {(calculatingTime)} ns")
-ProcessVisualization.processVisualization(controlPoints, iterations)
+ProcessVisualization.quadraticProcessVisualization(controlPoints, iterations)
