@@ -1,0 +1,1 @@
+Titik kontrol adalah (1,4.5) , (6, 4.2), dan (10, 7) dengan lima kali iterasi.

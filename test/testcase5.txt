@@ -1,0 +1,1 @@
+Titik kontrol adalah (9, 5) , (2, 1), dan (-4, 3) dengan tujuh kali iterasi. Sebelumnya memberikan input titik (9, #) yang meminta kembali validasi
