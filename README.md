@@ -21,7 +21,7 @@ Program ini dapat menampilkan Kurva Bezier Kuadratik dari masukan tiga titik dan
 ## Features
 - Melakukan pembentukan Kurva Bezier dengan Algoritma Brute Force
 - Melakukan pembentukan Kurva Bezier dengan Algoritma Divide and Conquer
-- Menampilkan visualisasi tahap per tahap pembangkitan 
+- Menampilkan visualisasi tahap per tahap pembangkitan pada implementasi Algoritma Divide and Conquer Kurva Bezier Kuadratik
 - Menampilkan control point akhir yang membentuk Kurva Bezier beserta waktu eksekusi pembentukan control point akhir Kurva Bezier
 
 ## Requirements
@@ -38,38 +38,22 @@ cd src
 3. Jalankan program utama dengan perintah berikut
 
 ```
-python main.py
+python Main.py
 ```
 
 ## Repository Structure
 ```
-+---bin
-+----------build  
-+----------dist
-|           main.exe
-|       main.spec
-|
 +---doc
 |       Tucil2_13522060_13522087.pdf
 |
 +---src
-|       main.py
-|       randomize.py
-|       sekuens.py
-|       tokens.py
-|       tree.py
+|       BezierBruteForce.py
+|       BezierDNC.py
+|       BezierDNCMulti.py
+|       bezierMulti.py
+|       Main.py
+|       ProcessVisualization.py
+|       ShowCurve.py
 |
 +---test
-+----------output                
-|               testcase1output.txt
-|               testcase2output.txt
-|               testcase4output.txt
-|               testcase6output.txt
-|               testcase7output.txt
-|       testcase1.txt
-|       testcase2.txt
-|       testcase3.txt
-|       testcase4.txt
-|       testcase5.txt
-|       testcase6.txt
 ```
