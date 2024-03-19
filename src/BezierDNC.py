@@ -8,19 +8,19 @@ def findMidpoint(point1, point2):
 
 def bezierDNC(point1, point2, point3, iteration):
     """Getting points for bezier curve except the first and last control points"""
-    bezierPointList = []  
+    bezierPoint = []  
     if iteration > 0:  
         midpoint1 = findMidpoint(point1, point2)
         midpoint2 = findMidpoint(point2, point3)
-        bezierPoint = findMidpoint(midpoint1, midpoint2)
+        midpoint3 = findMidpoint(midpoint1, midpoint2)
 
-        leftBezierPoint = bezierDNC(point1, midpoint1, bezierPoint, iteration - 1) # DIVIDE AND CONQUER
-        bezierPointList.extend(leftBezierPoint) # COMBINE
-        bezierPointList.append(bezierPoint)
-        rightBezierPoint = bezierDNC(bezierPoint, midpoint2, point3, iteration - 1) # DIVIDE AND CONQUER
-        bezierPointList.extend(rightBezierPoint) # COMBINE
+        leftBezierPoints = bezierDNC(point1, midpoint1, midpoint3, iteration - 1) # DIVIDE AND CONQUER
+        bezierPoint.extend(leftBezierPoints) # COMBINE
+        bezierPoint.append(midpoint3)
+        rightBezierPoints = bezierDNC(midpoint3, midpoint2, point3, iteration - 1) # DIVIDE AND CONQUER
+        bezierPoint.extend(rightBezierPoints) # COMBINE
 
-    return bezierPointList 
+    return bezierPoint  
 
 def bezierCurveByDNC(control_points, iteration):
     """Conquering the points of bezier curve result for each iteration"""

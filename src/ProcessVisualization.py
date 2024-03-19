@@ -41,13 +41,13 @@ def quadraticBezierDNC(point1, point2, point3, iteration):
 
 def quadraticBezierCurveByDNC(control_points, iteration):
     """Conquering the points of bezier curve result for each iteration"""
-    allBezierCurve = []
+    # allBezierCurve = []
     bezierCurvePoints = []
     bezierCurvePoints.append(control_points[0])
     bezierCurvePoints.extend(quadraticBezierDNC(control_points[0], control_points[1], control_points[2], iteration))
     bezierCurvePoints.append(control_points[2])
-    allBezierCurve.append(bezierCurvePoints)
-    return allBezierCurve
+    # allBezierCurve.append(bezierCurvePoints)
+    return bezierCurvePoints
 
 def quadraticProcessVisualization(controlPoints, iterations) :
     a = []
@@ -63,7 +63,7 @@ def quadraticProcessVisualization(controlPoints, iterations) :
 
     x = []
     y = []
-    for point in allbezierpoints[-1]:
+    for point in allbezierpoints:
         x.append(point[0]) 
         y.append(point[1]) 
     plt.plot(x, y, label='hasil')
@@ -72,66 +72,3 @@ def quadraticProcessVisualization(controlPoints, iterations) :
     plt.legend()
 
     plt.show()
-    
-# def getMidpoints(points):
-#     """Getting midpoints of some given points"""
-#     midpoints = []
-#     for i in range(len(points)-1):
-#         midpoints.append(findMidpoint(points[i], points[i+1]))
-#     return midpoints
-
-# def getMostInnerMidpoint(points):
-#     """Getting the most inner midpoint from a collection of points
-#     @param points : collection of points or control points
-#     @return first_midpoints : collection of points that is the first midpoint for each iteration
-#     @return last_midpoints : collection of points that is the last midpoint for each iteration
-#     """
-#     first_midpoints = [points[0]]
-#     # print("first_midpoints ", first_midpoints)
-#     last_midpoints = [points[-1]]
-#     # print("last_midpoints ", last_midpoints)
-#     temp_midpoints = getMidpoints(points)
-#     # print("temp_midpoints ", temp_midpoints)
-
-#     for i in range(len(points)-1):
-#         x = []
-#         y = []
-#         first_midpoints.append(temp_midpoints[0])
-#         # print("first_midpoints ", first_midpoints)
-
-#         last_midpoints.append(temp_midpoints[-1])
-#         # print("last_midpoints ", last_midpoints)
-
-#         temp_midpoints = getMidpoints(temp_midpoints)
-#         # print("temp_midpoints ", temp_midpoints)
-#         for point in temp_midpoints:
-#             x.append(point[0]) 
-#             y.append(point[1]) 
-#             plt.plot(x, y, label='hasil')
-        
-#     reversed_last_midpoints = list(reversed(last_midpoints))
-#     return first_midpoints, reversed_last_midpoints
-
-# def bezierDNCMulti(control_points, iteration):
-#     """Getting points for bezier curve"""
-#     bezierPoint = []  
-#     if iteration > 0:  
-#         first_midpoints, last_midpoints = getMostInnerMidpoint(control_points)
-#         most_inner_midpoint = first_midpoints[-1]
-
-#         iteration -= 1
-
-#         leftBezierPoints = bezierDNCMulti(first_midpoints, iteration) # DIVIDE AND CONQUER
-#         bezierPoint.extend(leftBezierPoints) # COMBINE
-#         bezierPoint.append(most_inner_midpoint)
-#         rightBezierPoints = bezierDNCMulti(last_midpoints, iteration) # DIVIDE AND CONUER
-#         bezierPoint.extend(rightBezierPoints) # COMBINE
-
-#     return bezierPoint
-
-# def bezierCurvebyDNCMulti(control_points, iteration):
-#     bezierCurvePoints = []
-#     bezierCurvePoints.append(control_points[0])
-#     bezierCurvePoints.extend(bezierDNCMulti(control_points, iteration))
-#     bezierCurvePoints.append(control_points[-1])
-#     return bezierCurvePoints 

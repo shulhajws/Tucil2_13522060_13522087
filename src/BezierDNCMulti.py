@@ -19,21 +19,13 @@ def getMostInnerMidpoint(points):
     @return last_midpoints : collection of points that is the last midpoint for each iteration
     """
     first_midpoints = [points[0]]
-    # print("first_midpoints ", first_midpoints)
     last_midpoints = [points[-1]]
-    # print("last_midpoints ", last_midpoints)
     temp_midpoints = getMidpoints(points)
-    # print("temp_midpoints ", temp_midpoints)
 
     for i in range(len(points)-1):
         first_midpoints.append(temp_midpoints[0])
-        # print("first_midpoints ", first_midpoints)
-
         last_midpoints.append(temp_midpoints[-1])
-        # print("last_midpoints ", last_midpoints)
-
         temp_midpoints = getMidpoints(temp_midpoints)
-        # print("temp_midpoints ", temp_midpoints)
     reversed_last_midpoints = list(reversed(last_midpoints))
     return first_midpoints, reversed_last_midpoints
 
@@ -53,7 +45,6 @@ def bezierDNCMulti(control_points, iteration):
         bezierPoint.extend(rightBezierPoints) # COMBINE
 
     return bezierPoint
-
 
 def bezierCurvebyDNCMulti(control_points, iteration):
     startTime = time.time_ns()
