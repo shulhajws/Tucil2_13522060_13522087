@@ -77,12 +77,15 @@ def main() :
 
         if(choiceAlgo == 1):
             bezierCurvePerIteration, calculatingTime = bbf.getBruteForceBezier(iterations, controlPoints)
+            print("Titik-titik kurva Bezier final ", bezierCurvePerIteration[-1])
+            print(f"Waktu pemrosesan: {(calculatingTime)} ns")
             showcurve.showCurvePerIteration(bezierCurvePerIteration)
         elif(choiceAlgo == 2):
             bezierCurvePerIteration, calculatingTime = bdnc.bezierCurveByDNC(controlPoints, iterations)
+            print("Titik-titik kurva Bezier final ", bezierCurvePerIteration[-1])
+            print(f"Waktu pemrosesan: {(calculatingTime)} ns")
             ProcessVisualization.quadraticProcessVisualization(controlPoints, iterations)
-        print("Titik-titik kurva Bezier final ", bezierCurvePerIteration[-1])
-        print(f"Waktu pemrosesan: {(calculatingTime)} ns")
+
     elif (choiceAlgo == 3):
         num_of_control_points = int(input("Berapa kontrol poin yang ingin kamu gunakan? "))
         if(choiceInsControlPoints == 1):
