@@ -72,7 +72,7 @@ def quadraticProcessVisualization(controlPoints, iterations) :
     plt.legend()
 
     plt.show()
-
+    
 # def getMidpoints(points):
 #     """Getting midpoints of some given points"""
 #     midpoints = []
@@ -97,7 +97,6 @@ def quadraticProcessVisualization(controlPoints, iterations) :
 #         x = []
 #         y = []
 #         first_midpoints.append(temp_midpoints[0])
-#         x.append[]
 #         # print("first_midpoints ", first_midpoints)
 
 #         last_midpoints.append(temp_midpoints[-1])
@@ -105,6 +104,11 @@ def quadraticProcessVisualization(controlPoints, iterations) :
 
 #         temp_midpoints = getMidpoints(temp_midpoints)
 #         # print("temp_midpoints ", temp_midpoints)
+#         for point in temp_midpoints:
+#             x.append(point[0]) 
+#             y.append(point[1]) 
+#             plt.plot(x, y, label='hasil')
+        
 #     reversed_last_midpoints = list(reversed(last_midpoints))
 #     return first_midpoints, reversed_last_midpoints
 
