@@ -1,0 +1,1 @@
+Titik kontrol random berjumlah empat untuk 4 kali iterasi menghasilkan kurva Bézier kubik.
