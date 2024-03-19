@@ -1,0 +1,2 @@
+Titik kontrol adalah (8,5), (-9,10), dan (2,-1) dengan 3 kali iterasi. 
+Sebelumnya memberikan input A kali iterasi dan -3 kali iterasi yang meminta kembali validasi.

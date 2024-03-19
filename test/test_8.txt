@@ -1,0 +1,1 @@
+Titik kontrol random berjumlah lima untuk 7 kali iterasi.
